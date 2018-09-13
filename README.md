@@ -6,7 +6,7 @@ This code is a class that is used for scraping the data and returning it in JSON
 Sample use:
 
     eth_scraper = EthScraper.new()
-    puts eth_scraper.richest_addresses(5)
+    eth_scraper.richest_addresses(5)
 
 returns the following array at the present time:
 
