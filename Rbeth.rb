@@ -1,7 +1,9 @@
 require 'HTTParty'
 require 'Nokogiri'
 require 'json'
+
 class EthScraper
+  
   def scrape_rank(d)
     return d.text
   end
