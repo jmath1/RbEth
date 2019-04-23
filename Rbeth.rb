@@ -28,7 +28,13 @@ class EthScraper
         balance += c
       end
     end
-    return balance
+    balance_without_commas = ""
+    balance.chars do |c|
+      if c != ","
+        balance_without_commas += c
+      end
+    end
+    return balance_without_commas
   end
 
   def scrape_percentage(d)
@@ -72,10 +78,10 @@ class EthScraper
 
     targetrows.each do |tr|
       ranks.push(scrape_rank(tr[0]))
-      addresses.push(scrape_address(tr[2]))
-      aliases.push(scrape_alias(tr[3]))
-      balances.push(scrape_balance(tr[4]))
-      percentages.push(scrape_percentage(tr[5]))
+      addresses.push(scrape_address(tr[1]))
+      aliases.push(scrape_alias(tr[2]))
+      balances.push(scrape_balance(tr[3]))
+      percentages.push(scrape_percentage(tr[4]))
     end
 
     return ranks, addresses, aliases, percentages, balances
@@ -90,8 +96,8 @@ class EthScraper
     balances = []
     page_number = 1
 
-    while addresses.length <= num
-      doc = HTTParty.get("https://etherscan.io/accounts/#{page_number.to_s}?ps=100")
+    while addresses.length <= num.to_i
+      doc = HTTParty.get("https://etherscan.io/accounts/#{page_number}?ps=100")
 
       #join newly generated arrays with previously generated ones
       new_ranks, new_addresses, new_aliases, new_percentages, new_balances = extract_data_from_doc(doc)
@@ -108,7 +114,7 @@ class EthScraper
     #wrangle into an array of transactions
     result_data  = []
     i = 0
-    while i < num
+    while i < num.to_i
       result_data.push({
         :rank => ranks[i],
         :address =>addresses[i],
