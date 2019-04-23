@@ -9,7 +9,7 @@ Sample use:
 
     ruby api.rb
 
-http://localhost:4567/4 produces the an array that would look like the following:
+http://localhost:4567/4 produces an array that would look like the following:
     
     [
         {
